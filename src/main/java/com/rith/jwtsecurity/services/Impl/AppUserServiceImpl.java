@@ -28,3 +28,4 @@ public class AppUserServiceImpl implements AppUserService {
         return appUserRepository.register(request);
     }
 }
+

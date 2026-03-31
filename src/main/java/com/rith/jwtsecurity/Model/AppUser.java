@@ -29,7 +29,11 @@ public class AppUser implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         for(String role : roles){
-            authorities.add(new SimpleGrantedAuthority(role));
+            if (role.startsWith("ROLE_")) {
+                authorities.add(new SimpleGrantedAuthority(role));
+            } else {
+                authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
+            }
         }
         return authorities;
     }
@@ -42,6 +46,26 @@ public class AppUser implements UserDetails {
     @Override
     public String getUsername() {
         return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
 }

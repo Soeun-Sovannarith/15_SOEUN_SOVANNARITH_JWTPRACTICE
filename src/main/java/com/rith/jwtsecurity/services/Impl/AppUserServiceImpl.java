@@ -19,7 +19,7 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        // Implement your user retrieval logic here
+
         return appUserRepository.getUserByEmail(email);
     }
 
